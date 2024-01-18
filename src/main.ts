@@ -1,4 +1,5 @@
 import http from 'http'
+import url from 'url'
 
 import HelpCommand from './command/help'
 import BoCommand from './command/bo'
@@ -9,8 +10,12 @@ import 'dotenv/config'
 
 http
   .createServer(function (request, response) {
+    const hostname = request.headers.host as string
+    const pathname = url.parse(request.url!).pathname as string
+    console.log(`Request for ${hostname} ${pathname} received.`)
+
     response.writeHead(200, { 'Content-Type': 'text/plain' })
-    response.end(`request.url: ${request.url} \n`)
+    response.end(`url: http://${hostname + pathname} \n`)
   })
   .listen(process.env['PORT'])
 

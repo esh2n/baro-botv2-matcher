@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handleCommands = void 0;
 const http_1 = __importDefault(require("http"));
+const url_1 = __importDefault(require("url"));
 const help_1 = __importDefault(require("./command/help"));
 const bo_1 = __importDefault(require("./command/bo"));
 const ask_1 = __importDefault(require("./command/ask"));
@@ -12,8 +13,11 @@ const discord_js_1 = require("discord.js");
 require("dotenv/config");
 http_1.default
     .createServer(function (request, response) {
+    const hostname = request.headers.host;
+    const pathname = url_1.default.parse(request.url).pathname;
+    console.log(`Request for ${hostname} ${pathname} received.`);
     response.writeHead(200, { 'Content-Type': 'text/plain' });
-    response.end(`request.url: ${request.url} \n`);
+    response.end(`url: http://${hostname + pathname} \n`);
 })
     .listen(process.env['PORT']);
 const getCommands = () => {
