@@ -8,9 +8,9 @@ import { RawCommand } from './command/command'
 import 'dotenv/config'
 
 http
-  .createServer(function (_, response) {
+  .createServer(function (request, response) {
     response.writeHead(200, { 'Content-Type': 'text/plain' })
-    response.end('Discord bot is active now \n')
+    response.end(`request.url: ${request.url} \n`)
   })
   .listen(process.env['PORT'])
 
