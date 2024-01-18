@@ -9,7 +9,7 @@ require("dotenv/config");
 const cacheClient = new sdk_1.CacheClient({
     configuration: sdk_1.Configurations.Laptop.v1(),
     credentialProvider: sdk_1.CredentialProvider.fromString({
-        apiKey: process.env.MOMENTO_AUTH_TOKEN,
+        apiKey: process.env['MOMENTO_AUTH_TOKEN'],
     }),
     defaultTtlSeconds: 60 * 60 * 24,
 });
@@ -17,7 +17,7 @@ const createMemory = async (sessionId) => {
     const memory = new memory_1.BufferMemory({
         chatHistory: await momento_1.MomentoChatMessageHistory.fromProps({
             client: cacheClient,
-            cacheName: process.env.MOMENTO_CACHE,
+            cacheName: process.env['MOMENTO_CACHE'],
             sessionId,
             sessionTtl: 60 * 60 * 24,
         }),
@@ -32,7 +32,7 @@ exports.createMemory = createMemory;
 const createCache = async () => {
     return await momento_2.MomentoCache.fromProps({
         client: cacheClient,
-        cacheName: process.env.MOMENTO_CACHE,
+        cacheName: process.env['MOMENTO_CACHE'],
     });
 };
 exports.createCache = createCache;

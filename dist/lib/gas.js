@@ -11,7 +11,7 @@ const send = (message, client, user) => {
             },
         ],
     };
-    post(message, process.env.GAS_URL || '', jsonData, client);
+    post(message, process.env['GAS_URL'] || '', jsonData, client);
 };
 exports.send = send;
 function post(msg, url, data, client) {

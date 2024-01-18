@@ -8,7 +8,7 @@ export const send = (message, client, user) => {
       },
     ],
   }
-  post(message, process.env.GAS_URL || '', jsonData, client)
+  post(message, process.env['GAS_URL'] || '', jsonData, client)
 }
 function post(msg, url, data, client) {
   const request = require('request')

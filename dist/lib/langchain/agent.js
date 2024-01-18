@@ -13,7 +13,7 @@ const createAgentExecutor = async (sessionId, llm, _, memory) => {
         return instanceManager.get(sessionId);
     }
     const tools = [
-        new serpapi_1.SerpAPI(process.env.SERPAPI_API_KEY, {
+        new serpapi_1.SerpAPI(process.env['SERPAPI_API_KEY'], {
             location: 'Japan',
             hl: 'en',
             gl: 'us',

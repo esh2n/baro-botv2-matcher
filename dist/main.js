@@ -15,7 +15,7 @@ http_1.default
     response.writeHead(200, { 'Content-Type': 'text/plain' });
     response.end('Discord bot is active now \n');
 })
-    .listen(process.env.PORT);
+    .listen(process.env['PORT']);
 const getCommands = () => {
     return [
         help_1.default.getCommand(),
@@ -51,18 +51,18 @@ const waitSeconds = (second) => {
     });
 };
 const main = async () => {
-    const rest = new discord_js_1.REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN || '');
+    const rest = new discord_js_1.REST({ version: '10' }).setToken(process.env['DISCORD_BOT_TOKEN'] || '');
     try {
         const commands = getCommands();
         await waitSeconds(5);
         console.log('Started refreshing application (/) commands.');
-        if (process.env.GUILD_ID) {
-            await rest.put(discord_js_1.Routes.applicationGuildCommands(process.env.CLIENT_ID || '', process.env.GUILD_ID), {
+        if (process.env['GUILD_ID']) {
+            await rest.put(discord_js_1.Routes.applicationGuildCommands(process.env['CLIENT_ID'] || '', process.env['GUILD_ID']), {
                 body: commands,
             });
         }
         else {
-            await rest.put(discord_js_1.Routes.applicationCommands(process.env.CLIENT_ID || ''), {
+            await rest.put(discord_js_1.Routes.applicationCommands(process.env['CLIENT_ID'] || ''), {
                 body: commands,
             });
         }

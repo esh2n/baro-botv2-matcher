@@ -12,7 +12,7 @@ http
     response.writeHead(200, { 'Content-Type': 'text/plain' })
     response.end('Discord bot is active now \n')
   })
-  .listen(process.env.PORT)
+  .listen(process.env['PORT'])
 
 const getCommands = (): RawCommand[] => {
   return [
@@ -56,27 +56,30 @@ const waitSeconds = (second: number): Promise<void> => {
 
 const main = async () => {
   const rest: REST = new REST({ version: '10' }).setToken(
-    process.env.DISCORD_BOT_TOKEN || ''
+    process.env['DISCORD_BOT_TOKEN'] || ''
   )
 
   try {
     const commands = getCommands()
     await waitSeconds(5)
     console.log('Started refreshing application (/) commands.')
-    if (process.env.GUILD_ID) {
+    if (process.env['GUILD_ID']) {
       await rest.put(
         Routes.applicationGuildCommands(
-          process.env.CLIENT_ID || '',
-          process.env.GUILD_ID as string
+          process.env['CLIENT_ID'] || '',
+          process.env['GUILD_ID'] as string
         ),
         {
           body: commands,
         }
       )
     } else {
-      await rest.put(Routes.applicationCommands(process.env.CLIENT_ID || ''), {
-        body: commands,
-      })
+      await rest.put(
+        Routes.applicationCommands(process.env['CLIENT_ID'] || ''),
+        {
+          body: commands,
+        }
+      )
     }
   } catch (error) {
     console.error('Error while reloading application (/) commands: ', error)
