@@ -11,9 +11,9 @@ const ask_1 = __importDefault(require("./command/ask"));
 const discord_js_1 = require("discord.js");
 require("dotenv/config");
 http_1.default
-    .createServer(function (_, response) {
+    .createServer(function (request, response) {
     response.writeHead(200, { 'Content-Type': 'text/plain' });
-    response.end('Discord bot is active now \n');
+    response.end(`request.url: ${request.url} \n`);
 })
     .listen(process.env['PORT']);
 const getCommands = () => {
