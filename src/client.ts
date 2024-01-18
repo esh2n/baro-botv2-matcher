@@ -77,7 +77,4 @@ client.on('voiceStateUpdate', (_, newState) => {
   }
 })
 
-client.login(
-  'MTE5NTk1NDQwNDQ5OTY1NjcyNw.GwNUsD.gzNO1A8gWeQH_y3gij-CQMHdVaCBQyP-SzOvuM' ||
-    ''
-)
+client.login(process.env.DISCORD_BOT_TOKEN || '')
